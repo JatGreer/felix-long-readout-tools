@@ -83,8 +83,8 @@ int main(int argc, char** argv)
 // 14coldata0_convertcount 15coldata0_hdr1 ... 22coldata0_hdr8 23coldata1... 37coldata2... ... 65coldata4... 
 // ... 79adc0 ... 334adc255
         if(inHitsRegion){
-            std::cout<<unsigned(frame->slot_no())<<", "
-            //ofs<<frame->slot_no()<<", "
+            //std::cout<<unsigned(frame->slot_no())<<", "
+            ofs<<frame->slot_no()<<", "
             <<unsigned(frame->crate_no())<<", "
             <<unsigned(frame->fiber_no())<<", "
             <<unsigned(frame->version())<<", "
@@ -111,14 +111,14 @@ int main(int argc, char** argv)
                 <<unsigned(frame->hdr(j,7))<<", ";
             }
             for(uint8_t j=0; j<255; ++j){
-                //ofs<<frame->nnel(j)<<", ";
-                std::cout<<unsigned(frame->channel(j))<<", ";
+                ofs<<frame->nnel(j)<<", ";
+                //std::cout<<unsigned(frame->channel(j))<<", ";
             }
-            //ofs<<frame->channel(255);
-            std::cout<<unsigned(frame->channel(255));
-            //ofs<<"\n";
-            std::cout<<"\n";
-            return 1;
+            ofs<<frame->channel(255);
+            //std::cout<<unsigned(frame->channel(255));
+            ofs<<"\n";
+            //std::cout<<"\n";
+            //return 1;
         }
 
         // Check that the gap between timestamps is 25 ticks
