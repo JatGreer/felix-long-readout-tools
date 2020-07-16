@@ -124,6 +124,7 @@ int main(int argc, char** argv)
         // Check that the gap between timestamps is 25 ticks
         if(prev_timestamp!=0 && (timestamp-prev_timestamp!=25)){
             std::cerr << "Inter-frame timestamp gap of " << (timestamp-prev_timestamp) << " ticks at ts 0x" << std::hex << timestamp << std::dec << ". index=" << i << std::endl;
+            std::cout<<"Timestamp: "<<timestamp<<"\nPrevious timestamp: "<<prev_timestamp<<std::endl;
             ++nbad;
         }
         prev_timestamp=timestamp;
