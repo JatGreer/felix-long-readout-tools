@@ -95,7 +95,7 @@ int main(int argc, char** argv)
             <<unsigned(frame->wib_counter())<<", ";
             for(uint8_t j=0; j<4 ;++j){
                 //ofs<<frame->checksum_a(j)<<", "
-                std::cout<<frame->checksum_a(j))<<", "
+                std::cout<<unsigned(frame->checksum_a(j))<<", "
                 <<unsigned(frame->checksum_b(j))<<", "
                 <<unsigned(frame->error_register(j))<<", "
                 <<unsigned(frame->s1_error(j))<<", "
