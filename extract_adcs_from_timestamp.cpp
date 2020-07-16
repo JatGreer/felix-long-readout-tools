@@ -83,38 +83,38 @@ int main(int argc, char** argv)
 // 14coldata0_convertcount 15coldata0_hdr1 ... 22coldata0_hdr8 23coldata1... 37coldata2... ... 65coldata4... 
 // ... 79adc0 ... 334adc255
         if(inHitsRegion){
-            std::cout<<frame->slot_no()<<", "
+            std::cout<<frame->slot_no().c_str()<<", "
             //ofs<<frame->slot_no()<<", "
-            <<frame->crate_no()<<", "
-            <<frame->fiber_no()<<", "
-            <<frame->version()<<", "
-            <<frame->wib_errors()<<", "
-            <<frame->oos()<<", "
-            <<frame->mm()<<", "
-            <<frame->timestamp()<<", "
-            <<frame->wib_counter()<<", ";
+            <<frame->crate_no().c_str()<<", "
+            <<frame->fiber_no().c_str()<<", "
+            <<frame->version().c_str()<<", "
+            <<frame->wib_errors().c_str()<<", "
+            <<frame->oos().c_str()<<", "
+            <<frame->mm().c_str()<<", "
+            <<frame->timestamp().c_str()<<", "
+            <<frame->wib_counter().c_str()<<", ";
             for(uint8_t j=0; j<4 ;++j){
-                ofs<<frame->checksum_a(j)<<", "
-                <<frame->checksum_b(j)<<", "
-                <<frame->error_register(j)<<", "
-                <<frame->s1_error(j)<<", "
-                <<frame->s2_error(j)<<", "
-                <<frame->coldata_convert_count(j)<<", "
-                <<frame->hdr(j,0)<<", "
-                <<frame->hdr(j,1)<<", "
-                <<frame->hdr(j,2)<<", "
-                <<frame->hdr(j,3)<<", "
-                <<frame->hdr(j,4)<<", "
-                <<frame->hdr(j,5)<<", "
-                <<frame->hdr(j,6)<<", "
-                <<frame->hdr(j,7)<<", ";
+                ofs<<frame->checksum_a(j).c_str()<<", "
+                <<frame->checksum_b(j).c_str()<<", "
+                <<frame->error_register(j).c_str()<<", "
+                <<frame->s1_error(j).c_str()<<", "
+                <<frame->s2_error(j).c_str()<<", "
+                <<frame->coldata_convert_count(j).c_str()<<", "
+                <<frame->hdr(j,0).c_str()<<", "
+                <<frame->hdr(j,1).c_str()<<", "
+                <<frame->hdr(j,2).c_str()<<", "
+                <<frame->hdr(j,3).c_str()<<", "
+                <<frame->hdr(j,4).c_str()<<", "
+                <<frame->hdr(j,5).c_str()<<", "
+                <<frame->hdr(j,6).c_str()<<", "
+                <<frame->hdr(j,7).c_str()<<", ";
             }
             for(uint8_t j=0; j<255; ++j){
                 //ofs<<frame->channel(j)<<", ";
-                std::cout<<frame->channel(j)<<", ";
+                std::cout<<frame->channel(j).c_str()<<", ";
             }
             //ofs<<frame->channel(255);
-            std::cout<<frame->channel(255);
+            std::cout<<frame->channel(255).c_str();
             //ofs<<"\n";
             std::cout<<"\n";
             return 1;
