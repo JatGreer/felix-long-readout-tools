@@ -78,45 +78,44 @@ int main(int argc, char** argv)
             std::cout<<"exited hit region at timestamp: "<<timestamp<<std::endl;
             return 1;
         }
-    std::cout<<"Is rebuilding working?"<<std::endl;
 // 0slot, 1crate 2fiber 3version 4errors 5oos 6mm 7timestamp 8counter 9coldata0_chksma
 // 10coldata0_chksmb 11coldata0_errorregister 12coldata0_streamerr1 13coldata0_streamerr2
 // 14coldata0_convertcount 15coldata0_hdr1 ... 22coldata0_hdr8 23coldata1... 37coldata2... ... 65coldata4... 
 // ... 79adc0 ... 334adc255
         if(inHitsRegion){
-            std::cout<<frame->slot_no()<<", "
+            std::cout<<unsigned(frame->slot_no())<<", "
             //ofs<<frame->slot_no()<<", "
-            <<frame->crate_no()<<", "
-            <<frame->fiber_no()<<", "
-            <<frame->version()<<", "
-            <<frame->wib_errors()<<", "
-            <<frame->oos()<<", "
-            <<frame->mm()<<", "
-            <<frame->timestamp()<<", "
-            <<frame->wib_counter()<<", ";
+            <<unsigned(frame->crate_no())<<", "
+            <<unsigned(frame->fiber_no())<<", "
+            <<unsigned(frame->version())<<", "
+            <<unsigned(frame->wib_errors())<<", "
+            <<unsigned(frame->oos())<<", "
+            <<unsigned(frame->mm())<<", "
+            <<unsigned(frame->timestamp())<<", "
+            <<unsigned(frame->wib_counter())<<", ";
             for(uint8_t j=0; j<4 ;++j){
                 //ofs<<frame->checksum_a(j)<<", "
-                std::cout<<frame->checksum_a(j)<<", "
-                <<frame->checksum_b(j)<<", "
-                <<frame->error_register(j)<<", "
-                <<frame->s1_error(j)<<", "
-                <<frame->s2_error(j)<<", "
-                <<frame->coldata_convert_count(j)<<", "
-                <<frame->hdr(j,0)<<", "
-                <<frame->hdr(j,1)<<", "
-                <<frame->hdr(j,2)<<", "
-                <<frame->hdr(j,3)<<", "
-                <<frame->hdr(j,4)<<", "
-                <<frame->hdr(j,5)<<", "
-                <<frame->hdr(j,6)<<", "
-                <<frame->hdr(j,7)<<", ";
+                std::cout<<frame->checksum_a(j))<<", "
+                <<unsigned(frame->checksum_b(j))<<", "
+                <<unsigned(frame->error_register(j))<<", "
+                <<unsigned(frame->s1_error(j))<<", "
+                <<unsigned(frame->s2_error(j))<<", "
+                <<unsigned(frame->coldata_convert_count(j))<<", "
+                <<unsigned(frame->hdr(j,0))<<", "
+                <<unsigned(frame->hdr(j,1))<<", "
+                <<unsigned(frame->hdr(j,2))<<", "
+                <<unsigned(frame->hdr(j,3))<<", "
+                <<unsigned(frame->hdr(j,4))<<", "
+                <<unsigned(frame->hdr(j,5))<<", "
+                <<unsigned(frame->hdr(j,6))<<", "
+                <<unsigned(frame->hdr(j,7))<<", ";
             }
             for(uint8_t j=0; j<255; ++j){
                 //ofs<<frame->nnel(j)<<", ";
-                std::cout<<frame->channel(j)<<", ";
+                std::cout<<unsigned(frame->channel(j))<<", ";
             }
             //ofs<<frame->channel(255);
-            std::cout<<frame->channel(255);
+            std::cout<<unsigned(frame->channel(255));
             //ofs<<"\n";
             std::cout<<"\n";
             return 1;
