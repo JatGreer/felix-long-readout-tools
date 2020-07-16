@@ -91,8 +91,8 @@ int main(int argc, char** argv)
             <<unsigned(frame->wib_errors())<<", "
             <<unsigned(frame->oos())<<", "
             <<unsigned(frame->mm())<<", "
-            <<unsigned(frame->timestamp())<<", "
-            <<unsigned(frame->wib_counter())<<", ";
+            <<frame->timestamp()<<", "
+            <<frame->wib_counter()<<", ";
             for(uint8_t j=0; j<4 ;++j){
                 ofs<<frame->checksum_a(j)<<", "
                 //std::cout<<unsigned(frame->checksum_a(j))<<", "
