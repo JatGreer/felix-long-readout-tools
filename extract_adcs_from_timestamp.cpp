@@ -111,7 +111,7 @@ int main(int argc, char** argv)
                 <<unsigned(frame->hdr(j,7))<<", ";
             }
             for(uint8_t j=0; j<255; ++j){
-                ofs<<frame->nnel(j)<<", ";
+                ofs<<frame->channel(j)<<", ";
                 //std::cout<<unsigned(frame->channel(j))<<", ";
             }
             ofs<<frame->channel(255);
