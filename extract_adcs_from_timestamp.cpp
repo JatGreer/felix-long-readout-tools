@@ -70,44 +70,50 @@ int main(int argc, char** argv)
         uint64_t timestamp=frame->timestamp();
         if(timestamp==firsthittimestamp){
             inHitsRegion=true;
+            std::cout<<"Entered hit region at timestamp: "<<timestamp<<std::endl;
         }
-        else if(timestamp==lasthittimestamp){
+        else if(timestamp>=last_kept_timestamp){
             inHitsRegion=false;
+            std::cout<<"exited hit region at timestamp: "<<timestamp<<std::endl;
+            return 1;
         }
+    std::cout<<"Is rebuilding working?"<<std::endl;
 // 0slot, 1crate 2fiber 3version 4errors 5oos 6mm 7timestamp 8counter 9coldata0_chksma
 // 10coldata0_chksmb 11coldata0_errorregister 12coldata0_streamerr1 13coldata0_streamerr2
 // 14coldata0_convertcount 15coldata0_hdr1 ... 22coldata0_hdr8 23coldata1... 37coldata2... ... 65coldata4... 
 // ... 79adc0 ... 334adc255
         if(inHitsRegion){
-            ofs<<frame->slot_no()<<" "
-            <<frame->crate_no()<<" "
-            <<frame->fiber_no()<<" "
-            <<frame->version()<<" "
-            <<frame->wib_errors()<<" "
-            <<frame->oos()<<" "
-            <<frame->mm()<<" "
-            <<frame->timestamp()<<" "
-            <<frame->wib_counter()<<" ";
-            for(uint8_t j; j<4 ;++j){
-                ofs<<frame->checksum_a(j)<<" "
-                <<frame->checksum_b(j)<<" "
-                <<frame->error_register(j)<<" "
-                <<frame->s1_error(j)<<" "
-                <<frame->s2_error(j)<<" "
-                <<frame->coldata_convert_count(j)<<" "
-                <<frame->hdr(j,0)<<" "
-                <<frame->hdr(j,1)<<" "
-                <<frame->hdr(j,2)<<" "
-                <<frame->hdr(j,3)<<" "
-                <<frame->hdr(j,4)<<" "
-                <<frame->hdr(j,5)<<" "
-                <<frame->hdr(j,6)<<" "
-                <<frame->hdr(j,7)<<" ";
+            ofs<<frame->slot_no()<<", "
+            <<frame->crate_no()<<", "
+            <<frame->fiber_no()<<", "
+            <<frame->version()<<", "
+            <<frame->wib_errors()<<", "
+            <<frame->oos()<<", "
+            <<frame->mm()<<", "
+            <<frame->timestamp()<<", "
+            <<frame->wib_counter()<<", ";
+            for(uint8_t j=0; j<4 ;++j){
+                ofs<<frame->checksum_a(j)<<", "
+                <<frame->checksum_b(j)<<", "
+                <<frame->error_register(j)<<", "
+                <<frame->s1_error(j)<<", "
+                <<frame->s2_error(j)<<", "
+                <<frame->coldata_convert_count(j)<<", "
+                <<frame->hdr(j,0)<<", "
+                <<frame->hdr(j,1)<<", "
+                <<frame->hdr(j,2)<<", "
+                <<frame->hdr(j,3)<<", "
+                <<frame->hdr(j,4)<<", "
+                <<frame->hdr(j,5)<<", "
+                <<frame->hdr(j,6)<<", "
+                <<frame->hdr(j,7)<<", ";
             }
-            for(uint8_t j; j<256; ++j){
-                ofs<<frame->channel(j)<<" ";
+            for(uint8_t j=0; j<255; ++j){
+                ofs<<frame->channel(j)<<", ";
             }
+            ofs<<frame->channel(255);
             ofs<<"\n";
+            return 1;
         }
 
         // Check that the gap between timestamps is 25 ticks
