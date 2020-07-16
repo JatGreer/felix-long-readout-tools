@@ -84,7 +84,7 @@ int main(int argc, char** argv)
 // ... 79adc0 ... 334adc255
         if(inHitsRegion){
             //std::cout<<unsigned(frame->slot_no())<<", "
-            ofs<<frame->slot_no()<<", "
+            ofs<<unsigned(frame->slot_no())<<", "
             <<unsigned(frame->crate_no())<<", "
             <<unsigned(frame->fiber_no())<<", "
             <<unsigned(frame->version())<<", "
