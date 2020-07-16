@@ -83,7 +83,8 @@ int main(int argc, char** argv)
 // 14coldata0_convertcount 15coldata0_hdr1 ... 22coldata0_hdr8 23coldata1... 37coldata2... ... 65coldata4... 
 // ... 79adc0 ... 334adc255
         if(inHitsRegion){
-            ofs<<frame->slot_no()<<", "
+            std::cout<<frame->slot_no()<<", "
+            //ofs<<frame->slot_no()<<", "
             <<frame->crate_no()<<", "
             <<frame->fiber_no()<<", "
             <<frame->version()<<", "
@@ -109,10 +110,13 @@ int main(int argc, char** argv)
                 <<frame->hdr(j,7)<<", ";
             }
             for(uint8_t j=0; j<255; ++j){
-                ofs<<frame->channel(j)<<", ";
+                //ofs<<frame->channel(j)<<", ";
+                std::cout<<frame->channel(j)<<", ";
             }
-            ofs<<frame->channel(255);
-            ofs<<"\n";
+            //ofs<<frame->channel(255);
+            std::cout<<frame->channel(255);
+            //ofs<<"\n";
+            std::cout<<"\n";
             return 1;
         }
 
