@@ -101,7 +101,7 @@ int main(int argc, char** argv)
         if(prev_timestamp!=0 && (timestamp-prev_timestamp!=25)){
             std::cerr << "Inter-frame timestamp gap of " << (timestamp-prev_timestamp) << " ticks at ts 0x" << std::hex << timestamp << std::dec << ". index=" << i << std::endl;
             ++nbad;
-            if(inHitsRegion){
+            if(inHitsRegion==1){
                 std::cerr<<"This occurs within the region of overlapping hits and adcs!\n";
             }
         }
