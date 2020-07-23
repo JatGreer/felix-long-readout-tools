@@ -87,7 +87,7 @@ int main(int argc, char** argv)
         if(firsthittimestamp<=timestamp){
             inHitsRegion=true;
         }
-        if((lasthittimestamp+(63*25))<=timestamp)
+        if((lasthittimestamp+(63*25))<=timestamp){
             inHitsRegion=false;
         }
         if(inHitsRegion==1){
