@@ -50,6 +50,12 @@ int main(int argc, char** argv)
     std::string output_file_name;
     app.add_option("-o", output_file_name, "Output file", true)->required();
 
+    uint64_t firsthittimestamp;
+    app.add_option("-f", firsthittimestamp, "First timestamp (dec) of hits", true)->required();
+
+    uint64_t lasthittimestamp;
+    app.add_option("-l", lasthittimestamp, "Last timestamp (dec) of hits", true)->required();
+
     int nticks=-1;
     app.add_option("-n", nticks, "Number of ticks to output (-1 for no limit)", true);
 
@@ -68,6 +74,7 @@ int main(int argc, char** argv)
     size_t nbad=0;
     // The number of frames we'll actually loop over: might have been limited by the -n option
     size_t nframes=(nticks==-1) ? frame_file.num_frames() : std::min((size_t)nticks, frame_file.num_frames());
+    bool inHitsRegion=false;
 
     for(size_t i=0; i<nframes; ++i){
         const dune::FelixFrame* frame=frame_file.frame(i);
@@ -77,16 +84,26 @@ int main(int argc, char** argv)
         }
         // Print the ADC value for each of the 256 channels in the frame
         uint64_t timestamp=frame->timestamp();
-        fprintf(fout, "%#" PRIx64 " ", frame->timestamp());
-        for(int i=0; i<256; ++i){
-            fprintf(fout, "% 6d ", frame->channel(i));
+        if(firsthittimestamp<=timestamp<=(lasthittimestamp+(63*25))){
+            inHitsRegion=true;
         }
-        fprintf(fout, "\n");
-
+        else{
+            inHitsRegion=false;
+        }
+        if(inHitsRegion){
+            fprintf(fout, "%#" PRIx64 " ", frame->timestamp());
+            for(int i=0; i<256; ++i){
+                fprintf(fout, "% 6d ", frame->channel(i));
+            }
+            fprintf(fout, "\n");
+        }
         // Check that the gap between timestamps is 25 ticks
         if(prev_timestamp!=0 && (timestamp-prev_timestamp!=25)){
             std::cerr << "Inter-frame timestamp gap of " << (timestamp-prev_timestamp) << " ticks at ts 0x" << std::hex << timestamp << std::dec << ". index=" << i << std::endl;
             ++nbad;
+            if(inHitsRegion){
+                std::cerr<<"This occurs within the region of overlapping hits and adcs!\n";
+            }
         }
         prev_timestamp=timestamp;
     }
