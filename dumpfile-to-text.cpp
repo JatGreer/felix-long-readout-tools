@@ -84,13 +84,13 @@ int main(int argc, char** argv)
         }
         // Print the ADC value for each of the 256 channels in the frame
         uint64_t timestamp=frame->timestamp();
-        if(firsthittimestamp<=timestamp<=(lasthittimestamp+(63*25))){
+        if(firsthittimestamp<=timestamp){
             inHitsRegion=true;
         }
-        else{
+        if((lasthittimestamp+(63*25))<=timestamp)
             inHitsRegion=false;
         }
-        if(inHitsRegion){
+        if(inHitsRegion==1){
             fprintf(fout, "%#" PRIx64 " ", frame->timestamp());
             for(int i=0; i<256; ++i){
                 fprintf(fout, "% 6d ", frame->channel(i));
