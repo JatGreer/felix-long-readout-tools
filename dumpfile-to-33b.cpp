@@ -68,12 +68,12 @@ int main(int argc, char** argv)
     constexpr size_t frame_size=sizeof(dune::FelixFrame);
 
     FrameFile frame_file(input_file_name.c_str());
-    std::string binaryext=".bin";
+    std::string b33ext=".33b";
     std::string input_file_name_str = std::string(input_file_name.c_str());
-    std::string binarystring=input_file_name_str.append(binaryext);
+    std::string b33string=input_file_name_str.append(b33ext);
     // We use FILE* and fprintf, instead of std::ofstream, for output so we can get nice columns
     FILE* fout=fopen(output_file_name.c_str(), "w");
-    FILE* foutbin=fopen(binarystring.c_str(), "w");
+    FILE* foutbin=fopen(b33string.c_str(), "w");
 
     uint64_t prev_timestamp=0;
     size_t nbad=0;
