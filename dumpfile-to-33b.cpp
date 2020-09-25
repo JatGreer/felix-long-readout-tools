@@ -71,6 +71,7 @@ int main(int argc, char** argv)
     std::string b33ext=".33b";
     std::string input_file_name_str = std::string(input_file_name.c_str());
     std::string b33string=input_file_name_str.append(b33ext);
+    std::cout<<"b33 file name: "<<b33string<<std::endl;
     // We use FILE* and fprintf, instead of std::ofstream, for output so we can get nice columns
     FILE* fout=fopen(output_file_name.c_str(), "w");
     FILE* foutbin=fopen(b33string.c_str(), "w");
