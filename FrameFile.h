@@ -5,6 +5,7 @@
 #include <iostream>
 #include <stdexcept> // For std::runtime_error
 #include "FelixFormat.hh"
+#include <cstdint>
 
 class FrameFile
 {
@@ -59,17 +60,22 @@ public:
     }
     // Do the same but this time only extract
     // the uninterpreted binary
-    const char* frame_binary(size_t i)
+    void frame_binary(size_t i, uint32_t *binaryframe)
     {
-        if(i>=num_frames()) return nullptr;
-        // Seek to the right place in the file
-        m_file.seekg(i*sizeof(dune::FelixFrame));
-        // Check we didn't go past the end
-        if(m_file.bad() || m_file.eof()) return nullptr;
-        // Actually read the fragment into the buffer
-        m_file.read(m_buffer,sizeof(dune::FelixFrame));
-        if(m_file.bad() || m_file.eof()) return nullptr;
-        return m_buffer;
+        if(i>=num_frames()) return;
+        for(int j;j<(sizeof(dune::FelixFrame)/32);++j){
+            // Seek to the right place in the file
+            m_file.seekg((i*sizeof(dune::FelixFrame))+(j*sizeof(uint32_t)));
+            // Check we didn't go past the end
+            if(m_file.bad() || m_file.eof()) return;
+            // Actually read the fragment into the buffer
+            // 32b at a time
+            m_file.read(m_buffer,sizeof(uint32_t));
+            if(m_file.bad() || m_file.eof()) return;
+            binaryframe[j]=*m_buffer;
+        }
+
+        return;
     }
 
 protected:

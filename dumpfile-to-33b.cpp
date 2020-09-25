@@ -74,7 +74,7 @@ int main(int argc, char** argv)
     std::cout<<"b33 file name: "<<b33string<<std::endl;
     // We use FILE* and fprintf, instead of std::ofstream, for output so we can get nice columns
     FILE* fout=fopen(output_file_name.c_str(), "w");
-    FILE* foutbin=fopen(b33string.c_str(), "w");
+    FILE* foutb33=fopen(b33string.c_str(), "w");
 
     uint64_t prev_timestamp=0;
     size_t nbad=0;
@@ -97,20 +97,31 @@ int main(int argc, char** argv)
             inHitsRegion=false;
         }
         if(inHitsRegion==1){
+            size_t n_32b_words=sizeof(dune::FelixFrame)/32;
+            uint32_t binaryframe[n_32b_words]={0};
+            frame_file.frame_binary(i, binaryframe);
+            /*
             const char* binaryframe=frame_file.frame_binary(i);
             //work out number of 32b values which will be printed
             int n_32b_words = strlen(binaryframe)/4;
+            //sizeof(dune::FelixFrame)
             std::cout<<"n_32b_words in ff: "<<n_32b_words<<std::endl;
             for(int i=0; i<n_32b_words;++i){
                 uint8_t byte1=binaryframe[(i*4)+0];
                 uint8_t byte2=binaryframe[(i*4)+1];
                 uint8_t byte3=binaryframe[(i*4)+2];
                 uint8_t byte4=binaryframe[(i*4)+3];
-                u_int32_t wordbytes=byte4 | (byte3<<8) | (byte2<<16) | (byte1<<24);
+                uint32_t wordbytes=byte4 | (byte3<<8) | (byte2<<16) | (byte1<<24);
                 std::cout<<"32b hex line: "<<"%#08"<<PRIx32<<wordbytes<<" 1\n"<<std::endl;
-                fprintf(foutbin, "%#08" PRIx32 " 1\n",wordbytes);
+                fprintf(foutb33, "%#08" PRIx32 " 1\n",wordbytes);
                 return 1;
             }
+            */
+           for(int i;i<n_32b_words;++i){
+               std::cout<<"32b hex line: "<<"%#08"<<PRIx32<<binaryframe[i]<<" 1\n"<<std::endl;
+               fprintf(foutb33, "%#08" PRIx32 " 1\n", binaryframe[i]);
+            }
+            
             fprintf(fout, "%#" PRIx64 " ", frame->timestamp());
             for(int i=0; i<256; ++i){
                 fprintf(fout, "% 6d ", frame->channel(i));
