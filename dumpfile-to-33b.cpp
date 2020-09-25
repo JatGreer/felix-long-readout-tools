@@ -100,13 +100,16 @@ int main(int argc, char** argv)
             const char* binaryframe=frame_file.frame_binary(i);
             //work out number of 32b values which will be printed
             int n_32b_words = strlen(binaryframe)/4;
+            std::cout<<"n_32b_words in ff: "<<n_32b_words<<std::endl;
             for(int i=0; i<n_32b_words;++i){
                 uint8_t byte1=binaryframe[(i*4)+0];
                 uint8_t byte2=binaryframe[(i*4)+1];
                 uint8_t byte3=binaryframe[(i*4)+2];
                 uint8_t byte4=binaryframe[(i*4)+3];
                 u_int32_t wordbytes=byte4 | (byte3<<8) | (byte2<<16) | (byte1<<24);
+                std::cout<<"32b hex line: "<<"%#08"<<PRIx32<<wordbytes<<" 1\n"<<std::endl;
                 fprintf(foutbin, "%#08" PRIx32 " 1\n",wordbytes);
+                return 1;
             }
             fprintf(fout, "%#" PRIx64 " ", frame->timestamp());
             for(int i=0; i<256; ++i){
