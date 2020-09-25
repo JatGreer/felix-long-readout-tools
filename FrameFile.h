@@ -63,7 +63,7 @@ public:
     void frame_binary(size_t i, uint32_t *binaryframe)
     {
         if(i>=num_frames()) return;
-        for(int j;j<(sizeof(dune::FelixFrame)/32);++j){
+        for(int j;j<(sizeof(dune::FelixFrame)/4);++j){
             // Seek to the right place in the file
             m_file.seekg((i*sizeof(dune::FelixFrame))+(j*sizeof(uint32_t)));
             // Check we didn't go past the end

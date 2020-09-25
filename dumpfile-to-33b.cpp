@@ -97,7 +97,7 @@ int main(int argc, char** argv)
             inHitsRegion=false;
         }
         if(inHitsRegion==1){
-            size_t n_32b_words=sizeof(dune::FelixFrame)/32;
+            size_t n_32b_words=sizeof(dune::FelixFrame)/4;
             uint32_t binaryframe[n_32b_words]={0};
             frame_file.frame_binary(i, binaryframe);
             /*
@@ -118,7 +118,7 @@ int main(int argc, char** argv)
             }
             */
            for(int i;i<n_32b_words;++i){
-               std::cout<<"32b hex line: "<<"%#08"<<PRIx32<<binaryframe[i]<<" 1\n"<<std::endl;
+               std::cout<<"32b hex line: "<<"%#08"PRIx32<<binaryframe[i]<<" 1\n"<<std::endl;
                fprintf(foutb33, "%#08" PRIx32 " 1\n", binaryframe[i]);
             }
             
