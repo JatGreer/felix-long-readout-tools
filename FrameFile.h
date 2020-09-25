@@ -57,6 +57,20 @@ public:
         if(m_file.bad() || m_file.eof()) return nullptr;
         return reinterpret_cast<dune::FelixFrame*>(m_buffer);
     }
+    // Do the same but this time only extract
+    // the uninterpreted binary
+    const char* frame_binary(size_t i)
+    {
+        if(i>=num_frames()) return nullptr;
+        // Seek to the right place in the file
+        m_file.seekg(i*sizeof(dune::FelixFrame));
+        // Check we didn't go past the end
+        if(m_file.bad() || m_file.eof()) return nullptr;
+        // Actually read the fragment into the buffer
+        m_file.read(m_buffer,sizeof(dune::FelixFrame));
+        if(m_file.bad() || m_file.eof()) return nullptr;
+        return m_buffer;
+    }
 
 protected:
     std::ifstream m_file;
