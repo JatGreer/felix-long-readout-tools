@@ -118,14 +118,14 @@ int main(int argc, char** argv)
                 return 1;
             }
             */
-           for(int i;i<n_32b_words;++i){
-               std::cout<<"32b hex line: "<<"%#08" PRIx32<<binaryframe[i]<<" 1\n"<<std::endl;
-               fprintf(foutb33, "%#08" PRIx32 " 1\n", binaryframe[i]);
+           for(int j=0;j<n_32b_words;++j){
+               std::cout<<"32b hex line: "<<"%#08" PRIx32<<binaryframe[j]<<" 1\n"<<std::endl;
+               fprintf(foutb33, "%#08" PRIx32 " 1\n", binaryframe[j]);
             }
             
             fprintf(fout, "%#" PRIx64 " ", frame->timestamp());
-            for(int i=0; i<256; ++i){
-                fprintf(fout, "% 6d ", frame->channel(i));
+            for(int j=0; j<256; ++j){
+                fprintf(fout, "% 6d ", frame->channel(j));
             }
             fprintf(fout, "\n");
         }
