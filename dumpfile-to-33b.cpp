@@ -118,7 +118,7 @@ int main(int argc, char** argv)
             }
             */
            for(int i;i<n_32b_words;++i){
-               std::cout<<"32b hex line: "<<"%#08" PRIx32<<binaryframe[i]<<" 1\n"<<std::endl;
+               std::cout<<"32b hex line: "<<"%#08"PRIx32<<binaryframe[i]<<" 1\n"<<std::endl;
                fprintf(foutb33, "%#08" PRIx32 " 1\n", binaryframe[i]);
             }
             
@@ -139,4 +139,5 @@ int main(int argc, char** argv)
         prev_timestamp=timestamp;
     }
     std::cout << nbad << " bad of " << nframes << std::endl;
+    std::cout << "Size of felix frame in bytes: " << sizeof(dune::FelixFrame) << std::endl;
 }
