@@ -60,7 +60,7 @@ public:
     }
     // Do the same but this time only extract
     // the uninterpreted binary
-    void frame_binary(size_t i, uint32_t *binaryframe)
+    void frame_binary(size_t i, uint32_t (&binaryframe)[sizeof(dune::FelixFrame)/4])
     {
         if(i>=num_frames()) return;
         for(int j;j<(sizeof(dune::FelixFrame)/4);++j){
