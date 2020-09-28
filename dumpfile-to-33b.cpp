@@ -122,7 +122,8 @@ int main(int argc, char** argv)
                if(i==0){
                    std::cout<<"32b hex line: "<<"%#08" PRIx32<<binaryframe[j]<<" 1\n"<<std::endl;
                }
-               fprintf(foutb33, "%#08" PRIx32 " 1\n", binaryframe[j]);
+               //fprintf(foutb33, "%#08" PRIx32 " 1\n", binaryframe[j]);
+               fprintf(foutb33, "0x%08" PRIx32 " 1\n", binaryframe[j]);
             }
             
             fprintf(fout, "%#" PRIx64 " ", frame->timestamp());
