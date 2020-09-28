@@ -98,7 +98,8 @@ int main(int argc, char** argv)
         }
         if(inHitsRegion==1){
             size_t n_32b_words=sizeof(dune::FelixFrame)/4;
-            uint32_t binaryframe[n_32b_words]={0};
+            //uint32_t binaryframe[n_32b_words]={0};
+            uint32_t binaryframe[116]={0};
             frame_file.frame_binary(i, binaryframe);
             /*
             const char* binaryframe=frame_file.frame_binary(i);
