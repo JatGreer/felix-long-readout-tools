@@ -119,7 +119,7 @@ int main(int argc, char** argv)
             }
             */
            for(int j=0;j<n_32b_words;++j){
-               if(j==0){
+               if(i==0){
                    std::cout<<"32b hex line: "<<"%#08" PRIx32<<binaryframe[j]<<" 1\n"<<std::endl;
                }
                fprintf(foutb33, "%#08" PRIx32 " 1\n", binaryframe[j]);
