@@ -73,7 +73,7 @@ public:
             m_file.read(m_buffer,sizeof(uint32_t));
             //std::cout<<(uint32_t)*m_buffer<<std::endl;
             if(m_file.bad() || m_file.eof()) return;
-            binaryframe[j]=*m_buffer;
+            binaryframe[j]=(uint32_t)*m_buffer;
         }
 
         return;
