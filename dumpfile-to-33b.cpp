@@ -135,7 +135,7 @@ int main(int argc, char** argv)
                    tvalid = 0;
                }
                //fprintf(foutb33, "%#08" PRIx32 " 1\n", binaryframe[j]);
-               fprintf(foutb33, "0x%08" PRIx32 " 0b%01\n", binaryframe[j], tvalid);
+               fprintf(foutb33, "0x%08" PRIx32 " %u\n", binaryframe[j], tvalid);
             }
             
             fprintf(fout, "%#" PRIx64 " ", frame->timestamp());
