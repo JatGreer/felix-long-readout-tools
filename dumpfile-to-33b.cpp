@@ -102,10 +102,10 @@ int main(int argc, char** argv)
             //uint32_t binaryframe[n_32b_words]={0};
             uint32_t binaryframe[120]={0};
             frame_file.frame_binary(i, binaryframe);
-            binaryframe[0] = 60//0x0000003c
-            binaryframe[117] = 220//0x000000dc
-            binaryframe[118] = 188//0x000000bc
-            binaryframe[119] = 188//0x000000bc
+            binaryframe[0] = 60;//0x0000003c
+            binaryframe[117] = 220;//0x000000dc
+            binaryframe[118] = 188;//0x000000bc
+            binaryframe[119] = 188;//0x000000bc
             /*
             const char* binaryframe=frame_file.frame_binary(i);
             //work out number of 32b values which will be printed
@@ -127,7 +127,7 @@ int main(int argc, char** argv)
                if(i==0){
                    std::cout<<"32b hex line: "<<"%#08" PRIx32<<binaryframe[j]<<" 1\n"<<std::endl;
                }
-               tvalid = 0;
+               bool tvalid = 0;
                if(j==0 || j>=117){
                    tvalid = 1;
                }
