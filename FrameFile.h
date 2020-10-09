@@ -60,7 +60,7 @@ public:
     }
     // Do the same but this time only extract
     // the uninterpreted binary
-    void frame_binary(size_t i, uint32_t (&binaryframe)[116])
+    void frame_binary(size_t i, uint32_t (&binaryframe)[120])
     {
         if(i>=num_frames()) return;
         for(int j=0;j<116;++j){
@@ -74,7 +74,7 @@ public:
             //std::cout<<(uint32_t)*m_buffer<<std::endl;
             if(m_file.bad() || m_file.eof()) return;
             //binaryframe[j]=(uint32_t)*m_buffer;
-            binaryframe[j]=*reinterpret_cast<uint32_t*>(m_buffer);
+            binaryframe[j+1] = *reinterpret_cast<uint32_t*>(m_buffer); //j+1 to allow felix eof insertion
         }
 
         return;
